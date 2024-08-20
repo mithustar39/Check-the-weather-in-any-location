@@ -1,8 +1,10 @@
+#importing libraries
 import requests
 import tkinter as tk
 import re 
 from decouple import config
 
+#API's
 OPEN_WEATHER_MAP_API_KEY = config("b5bfa0d45f303df3ea11c3fc7283f672")
 OPEN_WEATHER_MAP_API_ENDPOINT = 'https://api.openweathermap.org/data/2.5/weather'
 
@@ -11,10 +13,10 @@ IPBASE_API_ENDPOINT = "https://api.ipbase.com/v2/info"
 
 IP_ADDRESS_REGEX = re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}\b")
 
-
+#function to get weather
 def get_weather():
     input_value = input_field.get()
-
+    
     if IP_ADDRESS_REGEX.match(input_value):
         ipbase_query_params = {
             "apiKey": IPBASE_API_KEY,
@@ -69,7 +71,7 @@ def get_location_weather():
     weather_label.config(
         text=f"{weather_data['name']}: {weather_data['main']['temp']}°C")
 
-
+#creating the front end
 root = tk.Tk()
 root.title("Weather Forecasting App")
 root.geometry("400x200")
